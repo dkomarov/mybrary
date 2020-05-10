@@ -6,11 +6,13 @@
   <title>Mybrary</title>
 </head>
 <body>
-  Before
+
   <br>
+  <%- include('../partials/header.ejs') %> <!-- include header links on each page -->
+  <%- include('../partials/errorMessage.ejs') %> <!-- include error msg partial on each page -->
   <%- body %> <!-- everything from layout will be imported into each view -->
   <br>
-  After
+
 
 </body>
 </html>
