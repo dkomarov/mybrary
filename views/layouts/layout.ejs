@@ -3,16 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="/public/stylesheets/filepond.css" rel="stylesheet">
+  <link href="/public/stylesheets/filepond-plugin-image-preview.css" rel="stylesheet">
+
   <title>Mybrary</title>
 </head>
 <body>
-
   <br>
   <%- include('../partials/header.ejs') %> <!-- include header links on each page -->
   <%- include('../partials/errorMessage.ejs') %> <!-- include error msg partial on each page -->
   <%- body %> <!-- everything from layout will be imported into each view -->
   <br>
 
-
 </body>
+<script src="/javascripts/filepond-plugin-file-encode.js" rel="javascripts" ></script>
+<script src="/javascripts/filepond-plugin-image-preview.js" rel="javascripts" ></script>
+<script src="/javascripts/filepond-plugin-image-resize.js" rel="javascripts" ></script>
+<script src="/javascripts/filepond.js" rel="javascripts" ></script>
+<script src="/javascripts/fileUpload.js" rel="javascripts" ></script>
 </html>
