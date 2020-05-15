@@ -9,9 +9,9 @@
   <title>Mybrary</title>
 </head>
 <body>
-  <%- include('../partials/header.ejs') %>
-  <%- include('../partials/errorMessage.ejs') %>
-  <%- body %>
+  <%- include('../partials/header.ejs') %> <!-- include header links on each page -->
+  <%- include('../partials/errorMessage.ejs') %> <!-- include error msg partial on each page -->
+  <%- body %>  <!-- everything from layout will be imported into each view -->
 </body>
 <script src="/javascripts/filepond-plugin-image-preview.js"></script>
 <script src="/javascripts/filepond-plugin-file-encode.js"></script>
