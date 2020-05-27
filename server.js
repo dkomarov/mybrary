@@ -30,4 +30,6 @@ app.use('/', indexRouter)
 app.use('/authors', authorRouter)
 app.use('/books', bookRouter)
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000, function() {
+  console.log('\nServer listening on port 3000.\n')
+})

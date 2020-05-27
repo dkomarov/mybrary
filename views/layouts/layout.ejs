@@ -6,12 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="/stylesheets/filepond.css" rel="stylesheet">
   <link href="/stylesheets/filepond-plugin-image-preview.css" rel="stylesheet">
+  <link href="/stylesheets/main.css" rel='stylesheet'>
   <title>Mybrary</title>
 </head>
 <body>
-  <%- include('../partials/header.ejs') %> <!-- include header links on each page -->
-  <%- include('../partials/errorMessage.ejs') %> <!-- include error msg partial on each page -->
-  <%- body %>  <!-- everything from layout will be imported into each view -->
+  <div class="container">
+    <%- include('../partials/header.ejs') %> <!-- include header links on each page -->
+    <%- include('../partials/errorMessage.ejs') %> <!-- include error msg partial on each page -->
+    <%- body %> <!-- everything from layout will be imported into each view -->
+  </div>
 </body>
 <script src="/javascripts/filepond-plugin-image-preview.js"></script>
 <script src="/javascripts/filepond-plugin-file-encode.js"></script>
