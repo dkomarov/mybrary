@@ -6,13 +6,21 @@ const Book =  require('../models/book')
 // All Authors Route
 router.get('/', async (req, res) => {
   let searchOptions = {}
+
   if (req.query.name != null && req.query.name !== '') {
     searchOptions.name = new RegExp(req.query.name, 'i') // case in-sensitive
   }
+  
   try { 
     const authors = await Author.find(searchOptions) // find all authors ({})
-    res.render('authors/index', { authors: authors, 
-                                  searchOptions: req.query } )
+    let params = {
+      authors: authors,
+      searchOptions: req.query
+    }
+    if (req.query.name == '') { params.errorMessage = 'Blank search request. Showing all authors.'}
+    res.render('authors/index', params)
+    // res.render('authors/index', { authors: authors, 
+    //                               searchOptions: req.query, } )
   }
   catch {
     res.redirect('/')
@@ -27,9 +35,6 @@ router.get('/new', (req, res) => {
 
 // Create Author Route
 router.post('/', async (req, res) => {
-  //res.redirect('author')
-  //res.send(req.body.name)
-  //res.redirect('authors')
   
   const author = new Author({
     name: req.body.name
@@ -39,10 +44,9 @@ router.post('/', async (req, res) => {
     const newAuthor = await author.save()
     res.redirect(`authors/${newAuthor.id}`)
   } catch {
-      let locals = {errorMessage: 'Error creating Author'}
       res.render('authors/new', {
         author: author,
-        locals
+        errorMessage: 'Error creating Author'
       })
   }
  });
@@ -84,10 +88,9 @@ router.post('/', async (req, res) => {
       if (author == null) {
         res.redirect('/')
       } else {
-      let locals = {errorMessage: 'Error updating Author'}
       res.render('authors/new', {
         author: author,
-        locals
+        errorMessage: 'Error updating Author'
       })
     }
   }
