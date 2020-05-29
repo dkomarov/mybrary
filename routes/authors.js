@@ -6,7 +6,7 @@ const Book =  require('../models/book')
 // All Authors Route
 router.get('/', async (req, res) => {
   let searchOptions = {}
-  let errorMessage
+
   if (req.query.name != null && req.query.name !== '') {
     searchOptions.name = new RegExp(req.query.name, 'i') // case in-sensitive
   }
