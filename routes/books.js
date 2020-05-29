@@ -155,24 +155,29 @@ router.put('/:id', async (req, res) => {
   try {
     const authors = await Author.find({})
     // console.log('authors are', authors)
+
     const params = { 
       authors: authors,
       book: book
     }
+    
     //console.log('hasError is', hasError)
-  if (hasError) {
-    params.errorMessage = 'Error Updating Book'
-  } else {
-    params.errorMessage = 'Error Creating Book'
-  }
-
-  //const book = new Book()
-  res.render(`books/${form}`, params)
-  } catch {
-    //console.log(error)
-    res.redirect('/books')
-  }
- }
+    if (hasError) {
+      if (form === 'edit') {
+        // locals = {errorMessage: 'Error Updating Book'}
+        params.errorMessage = 'Error Updating Book'
+      } else {
+        // locals = {errorMessage: 'Error Creating Book'}
+        //console.log('Error creating book. Attempting to show message...')
+        params.errorMessage = 'Error Creating Book'
+      }
+    }
+      res.render(`books/${form}`, params)
+    } catch (e) {
+      console.log(e)
+      res.redirect('/books')
+    }
+  } 
 
  // save cover inside of db
  function saveCover(book, coverEncoded) {
