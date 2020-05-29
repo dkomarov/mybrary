@@ -13,8 +13,14 @@ router.get('/', async (req, res) => {
   
   try { 
     const authors = await Author.find(searchOptions) // find all authors ({})
-    res.render('authors/index', { authors: authors, 
-                                  searchOptions: req.query } )
+    let params = {
+      authors: authors,
+      searchOptions: req.query
+    }
+    if (req.query.name == '') { params.errorMessage = 'Blank search request. Showing all authors.'}
+    res.render('authors/index', params)
+    // res.render('authors/index', { authors: authors, 
+    //                               searchOptions: req.query, } )
   }
   catch {
     res.redirect('/')
