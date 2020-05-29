@@ -182,7 +182,13 @@ router.put('/:id', async (req, res) => {
  // save cover inside of db
  function saveCover(book, coverEncoded) {
    if (coverEncoded == null) return
-   const cover = JSON.parse(coverEncoded)
+   let cover
+   try {
+    cover = JSON.stringify(coverEncoded)
+   } catch (e) {
+     console.log(e)
+   }
+
   // console.log('coverencoded is:', coverEncoded)
    if (cover != null && imageMimeTypes.includes(cover.type)) {
     book.coverImage = new Buffer.from(cover.data, 'base64')
@@ -190,4 +196,4 @@ router.put('/:id', async (req, res) => {
   }
  }
 
-module.exports = router; // indexRouter 
+module.exports = router; // indexRouter
