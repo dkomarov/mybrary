@@ -44,13 +44,13 @@ router.get('/new', async (req, res) => {
 
 // Create Book Route
 router.post('/', async (req, res) => {
-  //const fileName = req.file != null ? req.file.filename : null
+  // console.log('on POST route')
+  // const fileName = req.file != null ? req.file.filename : null
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
     publishDate: new Date(req.body.publishDate),
     pageCount: req.body.pageCount,
-    //coverImageName: fileName,
     description: req.body.description
   })
  // console.log('req.body is', req.body)
@@ -59,10 +59,11 @@ router.post('/', async (req, res) => {
   try {
     const newBook = await book.save()
     res.redirect(`books/${newBook.id}`)
-  } catch {
+  } catch (e) {
     // if (book.coverImageName != null) {
     //   removeBookCover(book.coverImageName)
     // }
+    console.log(e)
     renderNewPage(res, book, true)
   }
  });
@@ -91,7 +92,8 @@ router.get('/:id/edit', async (req, res) => {
   try {
     const book = await Book.findById(req.params.id)
     renderEditPage(res, book)
-  } catch {
+  } catch (e) {
+    console.log(e)
     res.redirect('/')
   }
 });
@@ -184,7 +186,7 @@ router.put('/:id', async (req, res) => {
    if (coverEncoded == null) return
    let cover
    try {
-    cover = JSON.stringify(coverEncoded)
+    cover = JSON.parse(coverEncoded)
    } catch (e) {
      console.log(e)
    }
@@ -193,6 +195,8 @@ router.put('/:id', async (req, res) => {
    if (cover != null && imageMimeTypes.includes(cover.type)) {
     book.coverImage = new Buffer.from(cover.data, 'base64')
     book.coverImageType = cover.type
+  } else {
+    console.log('Cover or image mime type not saved.')
   }
  }
 
