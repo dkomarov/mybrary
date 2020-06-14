@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
    } catch {
       res.redirect('/')
    }
-   res.send('Show Author ' + req.params.id)
+   // res.send('Show Author ' + req.params.id)
  })
 
  router.get('/:id/edit', async (req, res) => {
