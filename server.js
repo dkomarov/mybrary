@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}))
 
 const mongoose = require('mongoose')
 
-if (env === 'production') {
+if (env != 'production') {
   mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 } else {
   mongoose.connect('mongodb+srv://user2:'+process.env.MONGO_ATLAS+'@cluster0-cxz4x.mongodb.net/mybrary?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
